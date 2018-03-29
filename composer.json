@@ -1,0 +1,13 @@
+{
+    "name": "drupal/graphql_jwt_login",
+    "description": "Adds an GraphQL Query to generate JWT TOKENS based on user credentials.",
+    "type": "drupal-module",
+    "authors": [
+        {
+            "name": "Justin Winter",
+            "email": "justinlevi@gmail.com"
+        }
+    ],
+    "license": "GPL-2.0+",
+    "minimum-stability": "dev",
+}

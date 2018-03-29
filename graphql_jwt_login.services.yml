@@ -1,0 +1,4 @@
+services:
+  graphql_jwt_login.login_manager:
+    class: Drupal\graphql_jwt_login\LoginManager
+    arguments: ['@jwt.authentication.jwt', '@event_dispatcher', '@config.factory', '@key.repository', '@user.auth', '@flood', '@entity.manager']
