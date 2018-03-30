@@ -114,8 +114,9 @@ class LoginManager {
    * @param string $password
    *   The password.
    *
-   * @return string
+   * @return array
    *   The jwt key.
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    */
   public function authenticate($username, $password) {
 
@@ -152,19 +153,28 @@ class LoginManager {
             $event = new JwtAuthGenerateEvent(new JsonWebToken());
             $this->eventDispatcher->dispatch(JwtAuthEvents::GENERATE, $event);
             $jwt = $event->getToken();
-            return $this->transcoder->encode($jwt);
+            return [
+              'key' => $this->transcoder->encode($jwt),
+              'error' => 'null'
+            ];
           }
           else {
             // Register a per-user failed login event.
             $this->flood->register('graphql_auth.failed_login_user', $flood_config->get('user_window'), $identifier);
-            return LoginManager::ERROR;
+            return [
+              'key' => 'null',
+              'error' => LoginManager::ERROR
+            ];
           }
         }
       }
     }
     // Always register an IP-based failed login event.
     $this->flood->register('graphql_auth.failed_login_ip', $flood_config->get('ip_window'));
-    return LoginManager::ERROR;
+    return [
+      'key' => 'null',
+      'error' => LoginManager::ERROR
+    ];
 
   }
 

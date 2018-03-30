@@ -9,6 +9,7 @@ use Drupal\graphql_jwt_login\LoginManager;
 use GraphQL\Type\Definition\ResolveInfo;
 use Drupal\graphql\GraphQL\Execution\ResolveContext;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\graphql_jwt_login\Plugin\GraphQL\Types\Jwt;
 
 /**
  * Login
@@ -17,8 +18,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   id = "login",
  *   secure = true,
  *   name = "login",
- *   type = "String",
- *   multi = true,
+ *   type = "Jwt",
  *   response_cache_max_age = 0,
  *   arguments = {
  *      "input" = "LoginInput"
