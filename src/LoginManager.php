@@ -150,7 +150,18 @@ class LoginManager {
           $uid = $this->userAuth->authenticate($username, $password);
           if ($uid) {
             $this->flood->clear('graphql_auth.failed_login_user', $identifier);
-            $event = new JwtAuthGenerateEvent(new JsonWebToken((object) ["drupal" => (object) [ "uid" => $uid ]]));
+            $event = new JwtAuthGenerateEvent(
+              new JsonWebToken(
+                (object)[
+                  "iat" => "",
+                  "exp" => "",
+                  "uid" => $uid,
+                  "drupal" => (object)[
+                    "uid" => $uid
+                  ]
+                ]
+              )
+            );
             $this->eventDispatcher->dispatch(JwtAuthEvents::GENERATE, $event);
             $jwt = $event->getToken();
             return [
