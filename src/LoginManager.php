@@ -156,7 +156,7 @@ class LoginManager {
                   "iat" => "",
                   "exp" => "",
                   "uid" => $uid,
-                  "drupal" => (object)[
+                  "drupal" => [
                     "uid" => $uid
                   ]
                 ]
